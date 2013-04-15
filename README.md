@@ -8,13 +8,21 @@ Add this line to your application's Gemfile:
 
     gem 'preferences_boxer'
 
-If you want Yaml store, add to config/envronment.rb :
+If you want Yaml store, create yaml file with settings:
+<tt> ---</tt>
+<tt>site_name: test1</tt>
+<tt>owner_name: test2</tt>
+
+Then add to config/envronment.rb :
  <tt> PreferencesBoxer.store_type='Yaml'
 PreferencesBoxer::YamlStore.path=Rails.root.join('config/settings.yml')</tt>
 
-else If you want AR::Store
-
+else If you want to use AR::Store add
 <tt># PreferencesBoxer.store_type='Store'</tt>
+then generate setting table
+<tt>rails g preferences_boxer</tt>
+<tt>rake db:migrate</tt>
+
 
 Then assign 
 <tt>AdminSettings=PreferencesBoxer::Settings.instance</tt>
