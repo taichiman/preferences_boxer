@@ -1,13 +1,13 @@
 module PreferencesBoxer
   class StoreStore
     def self.set(name, val)
-      o=SiteSetting.first
+      o=BoxerSetting.first
       o.settings[name.to_sym]=val
       o.save
     end
 
     def self.get(name)
-      SiteSetting.first.settings[name.to_sym]
+      BoxerSetting.first.settings[name.to_sym]
     end
   end
 end

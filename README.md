@@ -1,6 +1,6 @@
 # PreferencesBoxer
 
-TODO: Write a gem description
+This gem stores settings within Yaml file or ActiveRecord::Store
 
 ## Installation
 
@@ -8,17 +8,21 @@ Add this line to your application's Gemfile:
 
     gem 'preferences_boxer'
 
-And then execute:
+If you want Yaml store, add to config/envronment.rb :
+ <tt> PreferencesBoxer.store_type='Yaml'
+PreferencesBoxer::YamlStore.path=Rails.root.join('config/settings.yml')</tt>
 
-    $ bundle
+else If you want AR::Store
 
-Or install it yourself as:
+<tt># PreferencesBoxer.store_type='Store'</tt>
 
-    $ gem install preferences_boxer
+Then assign 
+<tt>AdminSettings=PreferencesBoxer::Settings.instance</tt>
 
 ## Usage
 
-TODO: Write usage instructions here
+In your application you can save value <tt>AdminSettings.{YOUR KEY}=value</tt> and after can read the value <tt>AdminSettings.{YOUR KEY}</tt>
+
 
 ## Contributing
 

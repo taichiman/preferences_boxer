@@ -1,6 +1,12 @@
 module PreferencesBoxer
   class YamlStore
-    # @@path=Rails.root.join('config/settings.yml')
+    def self.path= v
+      @@path=v
+    end
+
+    def self.path
+      @@path
+    end
 
     def self.set(name, val)
       config=YAML::load(File.read(@@path))
