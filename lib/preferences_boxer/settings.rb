@@ -27,7 +27,7 @@ module PreferencesBoxer
         when 'Store'
           begin
             # TODO alarm: if table not exists yet
-            BoxerSetting.find_or_create_by_id 1, settings: {site_name: 'test1', owner_name: 'test2', admin_login: 'root', admin_password: '$2a$10$sd66SJyZxCVjavZ2Cz3s1OsuoFawJ4Pyu/GPc98mj8k0ahSp.feQW'}
+            BoxerSetting.find_or_create_by_id 1
           rescue
           end
           @handler=PreferencesBoxer::StoreStore
