@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PreferencesBoxer::YamlStore do
   it 'should check if path to yaml file is true' do
-    expect { PreferencesBoxer::YamlStore.path='test_string' }.to raise_error 
+    expect { PreferencesBoxer::YamlStore.path = 'test_string' }.to raise_error 
   end
 
   it 'should handle setting yaml file' do

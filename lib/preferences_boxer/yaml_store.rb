@@ -2,7 +2,7 @@ module PreferencesBoxer
   class YamlStore
     def self.path= path
       raise unless YAML.load_file path
-      @@path=path
+      @@path = path
     end
 
     def self.path
@@ -10,8 +10,8 @@ module PreferencesBoxer
     end
 
     def self.set(name, val)
-      config=YAML::load(File.read(@@path))
-      config[name]=val
+      config = YAML::load(File.read(@@path))
+      config[name] = val
       File.open(@@path, 'w') {|f| f.write(YAML.dump(config))}
     end
 

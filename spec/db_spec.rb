@@ -10,10 +10,10 @@ end
 describe PreferencesBoxer::StoreStore do
 
   before :all do 
-    PreferencesBoxer.store_type='Store'
+    PreferencesBoxer.store_type = 'Store'
     Settings = PreferencesBoxer::Settings.instance
     r=BoxerSetting.first
-    r.settings[:key1]='val1'
+    r.settings[:key1] = 'val1'
     r.save
     puts "create in before | #{BoxerSetting.first.inspect}"
   end
@@ -31,7 +31,7 @@ describe PreferencesBoxer::StoreStore do
   end
 
   it 'should save new value' do
-    Settings.key_new='val_new'
+    Settings.key_new = 'val_new'
     Settings.key_new.should == 'val_new'
   end
 

@@ -5,7 +5,7 @@ require 'preferences_boxer/store_store'
 module PreferencesBoxer
 
   def self.store_type= v
-      @store_type=v
+      @store_type = v
   end
 
   def self.store_type
@@ -23,14 +23,14 @@ module PreferencesBoxer
       
       case PreferencesBoxer.store_type
         when 'Yaml'          
-          @handler=PreferencesBoxer::YamlStore       
+          @handler = PreferencesBoxer::YamlStore       
         when 'Store'
           begin
             # TODO alarm: if table not exists yet
             BoxerSetting.find_or_create_by_id 1
           rescue
           end
-          @handler=PreferencesBoxer::StoreStore
+          @handler = PreferencesBoxer::StoreStore
         # else
           #todo exeption
       end
