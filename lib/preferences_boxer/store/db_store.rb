@@ -1,5 +1,5 @@
 module PreferencesBoxer
-  class StoreStore
+  class DBStore < PreferencesBoxer::Store
     def self.set(name, val)
       o = BoxerSetting.first
       o.settings[name.to_sym] = val

@@ -7,7 +7,7 @@ class BoxerSetting < ActiveRecord::Base
   end
 end
 
-describe PreferencesBoxer::StoreStore do
+describe PreferencesBoxer::DBStore do
 
   before :all do 
     PreferencesBoxer.store_type = 'Store'

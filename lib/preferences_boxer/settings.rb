@@ -1,15 +1,27 @@
 require 'singleton'
-require 'preferences_boxer/yaml_store'
-require 'preferences_boxer/store_store'
+require 'preferences_boxer/store/yaml_store'
+require 'preferences_boxer/store/db_store'
 
 module PreferencesBoxer
 
-  def self.store_type= v
+  class << self 
+    def store_type= v
       @store_type = v
-  end
+    end
 
-  def self.store_type
-      @store_type
+    def store_type
+        @store_type
+    end
+
+    def configure
+      # Модулю сохранения передать каждому полученные ключи, и получить дескриптор 
+      # класса. Инициализацию из синглтона удалить.
+      #TODO проверить, что передали тип модуля сохранения
+
+      
+
+      PreferencesBoxer::Settings.instance      
+    end
   end
 
   class Settings 
@@ -30,7 +42,7 @@ module PreferencesBoxer
             BoxerSetting.find_or_create_by_id 1
           rescue
           end
-          @handler = PreferencesBoxer::StoreStore
+          @handler = PreferencesBoxer::DBStore
         # else
           #todo exeption
       end

@@ -1,5 +1,5 @@
 module PreferencesBoxer
-  class YamlStore
+  class YamlStore < PreferencesBoxer::Store
     def self.path= path
       raise unless YAML.load_file path
       @@path = path
