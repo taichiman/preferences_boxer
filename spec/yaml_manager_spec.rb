@@ -15,7 +15,7 @@ describe 'PreferencesBoxer::YamlStore' do
   #   AdminSettings.handler.should == PreferencesBoxer::DbStore
   # end
 
-  it 'should transmit additional settings to yaml store class' do
+  it 'should transmit init settings to yaml store class' do
     AdminSettings = PreferencesBoxer.configure do |config|
       config.store_type = 'yaml'
       config.path = 'spec/settings.yml'

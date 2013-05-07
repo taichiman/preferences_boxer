@@ -1,3 +1,3 @@
 class BoxerSetting < ActiveRecord::Base
-  store :settings, :set2
+  store :settings
 end
