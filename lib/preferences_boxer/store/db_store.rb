@@ -1,10 +1,9 @@
-require 'ostruct'
 module PreferencesBoxer
   class DbStore < PreferencesBoxer::Store
     class << self
       def configure block
           block.call self
-          User.class_eval(' store :settings ')
+          Здесь застрял, пока: Person.class_eval { store @source_field } 
       end
 
       def source_record=(rec)
@@ -16,8 +15,6 @@ module PreferencesBoxer
       end
 
       def set(name, val)
-        p '!!!!'
-        p name, val
         rec = @source_record
         eval "rec.#{@source_field}.unserialize[name.to_sym] = val"
         rec.save
