@@ -1,6 +1,4 @@
 require 'singleton'
-# require 'preferences_boxer/store/yaml_store'
-# require 'preferences_boxer/store/db_store'
 
 module PreferencesBoxer
 
@@ -12,9 +10,6 @@ module PreferencesBoxer
     def store_type
       @store_type
     end
-
-    # def method_missing(method, *args)
-    # end
 
     def configure &block
       # Модулю сохранения передать каждому полученные ключи, и получить дескриптор 
@@ -46,11 +41,6 @@ module PreferencesBoxer
         when 'yaml'          
           @handler = PreferencesBoxer::YamlStore       
         when 'db'
-          begin
-            # TODO alarm: if table not exists yet
-            BoxerSetting.find_or_create_by_id 1
-          rescue
-          end
           @handler = PreferencesBoxer::DbStore
         # else
           #todo exeption
