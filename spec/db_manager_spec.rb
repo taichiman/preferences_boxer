@@ -21,8 +21,6 @@ describe "PreferencesBoxer::DbStore" do
   end
 
   it 'should transmit additional settings to db store class' do
-    User.class_eval(' store :settings ')
-    p User.new
     AdminSettings = PreferencesBoxer.configure do |config|
       config.store_type = 'db'
       config.source_record = User.find(2)

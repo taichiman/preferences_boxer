@@ -3,7 +3,12 @@ module PreferencesBoxer
     class << self
       def configure block
           block.call self
-          Здесь застрял, пока: Person.class_eval { store @source_field } 
+          # eval "const_get( @source_record.class.name ).class_eval { store @source_field }"
+          # eval "p '!!'; p const_get( @source_record.class.name ).all"
+          # p const_get( @source_record.class )
+          # .send store :url; end }
+          User.class_eval { store :settings } #включает сериализацию
+          @source_record.reload # reload for update, after store method call
       end
 
       def source_record=(rec)
@@ -21,7 +26,10 @@ module PreferencesBoxer
       end
 
       def get(name)
-        eval "@source_record.#{@source_field}.unserialize[name.to_sym]"
+        begin # rescue, if value == nil
+          eval "@source_record.#{@source_field}.unserialize[name.to_sym]"
+        rescue
+        end
       end
     end
   end
