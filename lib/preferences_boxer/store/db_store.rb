@@ -1,13 +1,43 @@
 module PreferencesBoxer
   class DbStore < PreferencesBoxer::Store
-    def self.set(name, val)
-      o = BoxerSetting.first
-      o.settings[name.to_sym] = val
-      o.save
-    end
+    class << self
+      def configure block
+          begin
+            block.call self
+            @@source_record.class.class_eval { store @@source_field }
+            @@source_record.reload # reload for update, after store method call
+            val = eval("@@source_record.#{@@source_field}.unserialize")
+            if defined?(@@init_values) and @@init_values != nil and ( (val == nil) or ( val == {} ))then
+              eval("@@source_record.#{@@source_field}=@@init_values; @@source_record.save")
+            end
+          rescue # throught initialization, raised if @@source_record not existen in db yet
+          end
+      end
 
-    def self.get(name)
-      BoxerSetting.first.settings[name.to_sym]
+      def source_record=(rec)
+        @@source_record = rec
+      end
+
+      def source_field=(field)
+        @@source_field = field
+      end
+
+      def init_values=(val)
+        @@init_values = val
+      end
+
+      def set(name, val)
+        rec = @@source_record
+        eval "rec.#{@@source_field}.unserialize[name.to_sym] = val"
+        rec.save
+      end
+
+      def get(name)
+        begin # rescue, if value == nil
+          eval "@@source_record.#{@@source_field}.unserialize[name.to_sym]"
+        rescue
+        end
+      end
     end
   end
 end
