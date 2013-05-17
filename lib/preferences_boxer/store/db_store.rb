@@ -2,12 +2,15 @@ module PreferencesBoxer
   class DbStore < PreferencesBoxer::Store
     class << self
       def configure block
-          block.call self
-          @@source_record.class.class_eval { store @@source_field }
-          @@source_record.reload # reload for update, after store method call
-          val = eval("@@source_record.#{@@source_field}.unserialize")
-          if defined?(@@init_values) and @@init_values != nil and ( (val == nil) or ( val == {} ))then
-            eval("@@source_record.#{@@source_field}=@@init_values; @@source_record.save")
+          begin
+            block.call self
+            @@source_record.class.class_eval { store @@source_field }
+            @@source_record.reload # reload for update, after store method call
+            val = eval("@@source_record.#{@@source_field}.unserialize")
+            if defined?(@@init_values) and @@init_values != nil and ( (val == nil) or ( val == {} ))then
+              eval("@@source_record.#{@@source_field}=@@init_values; @@source_record.save")
+            end
+          rescue # throught initialization, raised if @@source_record not existen in db yet
           end
       end
 

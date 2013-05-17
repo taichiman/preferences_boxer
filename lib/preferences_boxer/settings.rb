@@ -12,9 +12,7 @@ module PreferencesBoxer
     end
 
     def configure &block
-      # Модулю сохранения передать каждому полученные ключи, и получить дескриптор 
-      # класса. Инициализацию из синглтона удалить.
-      begin
+      begin # TODO: Stupid setting @store_type. need refactor
         yield self
       rescue
       end
@@ -23,13 +21,13 @@ module PreferencesBoxer
 
       const_get("#{store_type.capitalize}Store").configure block
 
-      # PreferencesBoxer::Settings.instance      
-      PreferencesBoxer::Settings.new    
+      PreferencesBoxer::Settings.instance      
+      # PreferencesBoxer::Settings.new    
     end
   end
 
   class Settings 
-    # include Singleton
+    include Singleton
 
     def initialize
       #TODO Если начальная установка, то наверное заполняем сеттинги стандартными значениями
